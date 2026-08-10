@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --background: #17101c;
+  --foreground: #f5eef2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-geist-sans),
+    "PingFang SC",
+    "Noto Sans SC",
+    "Microsoft YaHei",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(179, 62, 92, 0.5);
+  color: #fff;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.float-slow {
+  animation: drift 5s ease-in-out infinite alternate;
+}
+
+.float-slower {
+  animation: drift 6.5s ease-in-out 0.8s infinite alternate;
+}
+
+.exporting .float-slow,
+.exporting .float-slower {
+  animation: none !important;
+  transform: none !important;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: reveal 0.7s ease-out both;
+}
+
+/* 用户偏好减少动效或低性能设备：关掉一切装饰动画，防渲染压力 */
+@media (prefers-reduced-motion: reduce) {
+  .float-slow,
+  .float-slower,
+  .reveal {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
